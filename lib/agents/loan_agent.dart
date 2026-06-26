@@ -5,20 +5,20 @@ import '../models/risk_analysis.dart';
 import '../models/negotiation_state.dart';
 import '../models/generated_surface.dart';
 import '../models/generated_widget.dart';
-import '../services/gemini_service.dart';
+import '../services/featherless_service.dart';
 import '../services/financial_service.dart';
 import '../services/negotiation_service.dart';
 
 class LoanAgent {
-  final GeminiService _geminiService;
+  final FeatherlessService _aiService;
   final FinancialService _financialService;
   final NegotiationService _negotiationService;
 
   LoanAgent({
-    required GeminiService geminiService,
+    required FeatherlessService aiService,
     required FinancialService financialService,
     required NegotiationService negotiationService,
-  })  : _geminiService = geminiService,
+  })  : _aiService = aiService,
         _financialService = financialService,
         _negotiationService = negotiationService;
 
@@ -27,7 +27,7 @@ class LoanAgent {
     required LoanOffer offer,
   }) async {
     try {
-      final result = await _geminiService.generateUISurface(
+      final result = await _aiService.generateUISurface(
         'Analyze risk for profile with credit score ${profile.creditScore}',
       );
       final json = jsonDecode(result) as Map<String, dynamic>;
@@ -55,7 +55,7 @@ Generate a $surfaceType surface with widgets.
 ''';
 
     try {
-      final result = await _geminiService.generateUISurface(context);
+      final result = await _aiService.generateUISurface(context);
       final json = jsonDecode(result) as Map<String, dynamic>;
       return GeneratedSurface.fromJson(json);
     } catch (_) {
@@ -68,7 +68,7 @@ Generate a $surfaceType surface with widgets.
     required FinancialProfile profile,
   }) async {
     try {
-      final result = await _geminiService.negotiateLoan(
+      final result = await _aiService.negotiateLoan(
         offer.apr,
         offer.apr * 0.85,
         offer.loanAmount,

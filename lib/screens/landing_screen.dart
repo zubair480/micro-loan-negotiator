@@ -83,7 +83,7 @@ class _LandingScreenState extends State<LandingScreen>
                         ),
                         const SizedBox(height: 24),
                         Text(
-                          'Powered by Gemini AI',
+                          'Powered by Featherless AI',
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                 color: Colors.grey[600],
                               ),

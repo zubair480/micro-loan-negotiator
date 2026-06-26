@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/conversation_provider.dart';
-import '../services/gemini_service.dart';
+import '../services/featherless_service.dart';
 import '../widgets/chat_bubble.dart';
 
 class ConversationScreen extends StatefulWidget {
@@ -14,7 +14,7 @@ class ConversationScreen extends StatefulWidget {
 class _ConversationScreenState extends State<ConversationScreen> {
   final _textController = TextEditingController();
   final _scrollController = ScrollController();
-  final _geminiService = GeminiService();
+  final _aiService = FeatherlessService();
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   void _sendInitialGreeting() async {
     final provider = context.read<ConversationProvider>();
     provider.setProcessing(true);
-    final response = await _geminiService.sendMessage(
+    final response = await _aiService.sendMessage(
       'Start the conversation. Greet the user and ask about their financial situation and loan needs.',
     );
     if (mounted) {
@@ -55,7 +55,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
     convProvider.setProcessing(true);
     _scrollToBottom();
 
-    final response = await _geminiService.sendMessage(text);
+    final response = await _aiService.sendMessage(text);
     if (!mounted) return;
 
     convProvider.addMessage(role: 'ai', content: response);
