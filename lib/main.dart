@@ -14,10 +14,12 @@ import 'screens/negotiation_screen.dart';
 import 'screens/summary_screen.dart';
 import 'catalog/widget_registry.dart';
 import 'utils/constants.dart';
+import 'utils/secrets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   WidgetRegistry.registerAll();
+  await Secrets.load();
   await _initSupabase();
   runApp(const NegotiaAIApp());
 }

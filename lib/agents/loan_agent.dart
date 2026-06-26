@@ -1,4 +1,3 @@
-import 'dart:convert';
 import '../models/loan_offer.dart';
 import '../models/financial_profile.dart';
 import '../models/risk_analysis.dart';
@@ -27,10 +26,9 @@ class LoanAgent {
     required LoanOffer offer,
   }) async {
     try {
-      final result = await _aiService.generateUISurface(
+      final json = await _aiService.generateUISurface(
         'Analyze risk for profile with credit score ${profile.creditScore}',
       );
-      final json = jsonDecode(result) as Map<String, dynamic>;
       return RiskAnalysis.fromJson(json);
     } catch (_) {
       return _financialService.analyzeRisk(profile: profile, offer: offer);
@@ -55,8 +53,7 @@ Generate a $surfaceType surface with widgets.
 ''';
 
     try {
-      final result = await _aiService.generateUISurface(context);
-      final json = jsonDecode(result) as Map<String, dynamic>;
+      final json = await _aiService.generateUISurface(context);
       return GeneratedSurface.fromJson(json);
     } catch (_) {
       return _fallbackSurface(surfaceType, title);

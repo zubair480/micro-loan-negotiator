@@ -8,7 +8,7 @@ class AppConstants {
   static const String supabaseUrl = 'YOUR_SUPABASE_URL';
   static const String supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
   static const String geminiApiKey = 'YOUR_GEMINI_API_KEY';
-  static const String featherlessApiKey = 'rc_934a45e35b95259ccd2b10ee2ce5f21fa0bb9154b9fdd638c3dc512d0b71729d';
+  static const String featherlessApiKey = 'YOUR_FEATHERLESS_API_KEY';
   static const String featherlessBaseUrl = 'https://api.featherless.ai/v1';
   static const String featherlessModel = 'meta-llama/Llama-3.3-70B-Instruct';
 

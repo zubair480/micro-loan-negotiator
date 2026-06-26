@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../utils/constants.dart';
+import '../utils/secrets.dart';
 
 class FeatherlessService {
   final String _apiKey;
@@ -11,7 +12,7 @@ class FeatherlessService {
     String? apiKey,
     String? baseUrl,
     String? model,
-  })  : _apiKey = apiKey ?? AppConstants.featherlessApiKey,
+  })  : _apiKey = apiKey ?? Secrets.featherlessKey,
         _baseUrl = baseUrl ?? AppConstants.featherlessBaseUrl,
         _model = model ?? AppConstants.featherlessModel;
 
@@ -95,7 +96,7 @@ When you detect enough information to generate a UI, include the JSON block.
 
       return 'Error ${response.statusCode}: ${response.body}';
     } catch (e) {
-      return 'Connection error: $e. Make sure the Featherless AI API key is set in constants.dart.';
+      return 'Connection error: $e. Make sure the Featherless AI API key is set in config/keys.json or passed via --dart-define=FEATHERLESS_KEY.';
     }
   }
 
